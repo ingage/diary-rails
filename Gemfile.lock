@@ -212,7 +212,7 @@ GEM
     thor (1.1.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
-    unicorn (5.4.1)
+    unicorn (6.0.0)
       kgio (~> 2.6)
       raindrops (~> 0.7)
     unicorn-rails (2.2.1)
@@ -257,13 +257,13 @@ DEPENDENCIES
   slack-ruby-client
   spring
   tzinfo-data
-  unicorn (~> 5.4.0)
+  unicorn (~> 6.0.0)
   unicorn-rails
   web-console (>= 4.1.0)
   webdrivers
 
 RUBY VERSION
-   ruby 2.6.6p146
+   ruby 3.0.1p64
 
 BUNDLED WITH
    2.2.15
