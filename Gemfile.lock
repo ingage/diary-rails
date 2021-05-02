@@ -63,11 +63,8 @@ GEM
     addressable (2.7.0)
       public_suffix (>= 2.0.2, < 5.0)
     aws-eventstream (1.1.1)
-    aws-partitions (1.443.0)
-    aws-sdk-cognitoidentityprovider (1.50.0)
-      aws-sdk-core (~> 3, >= 3.112.0)
-      aws-sigv4 (~> 1.1)
-    aws-sdk-core (3.113.1)
+    aws-partitions (1.449.0)
+    aws-sdk-core (3.114.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.239.0)
       aws-sigv4 (~> 1.1)
@@ -85,7 +82,7 @@ GEM
     bindex (0.8.1)
     binding_of_caller (1.0.0)
       debug_inspector (>= 0.0.1)
-    bootsnap (1.7.3)
+    bootsnap (1.7.4)
       msgpack (~> 1.0)
     builder (3.2.4)
     byebug (11.1.3)
@@ -102,16 +99,24 @@ GEM
     concurrent-ruby (1.1.8)
     crass (1.0.6)
     debug_inspector (1.1.0)
+    dotenv (2.7.6)
+    dotenv-rails (2.7.6)
+      dotenv (= 2.7.6)
+      railties (>= 3.2)
     dynamoid (3.7.0)
       activemodel (>= 4)
       aws-sdk-dynamodb (~> 1.0)
       concurrent-ruby (>= 1.0)
     erubi (1.10.0)
-    faraday (1.3.0)
+    faraday (1.4.1)
+      faraday-excon (~> 1.1)
       faraday-net_http (~> 1.0)
+      faraday-net_http_persistent (~> 1.1)
       multipart-post (>= 1.2, < 3)
-      ruby2_keywords
+      ruby2_keywords (>= 0.0.4)
+    faraday-excon (1.1.0)
     faraday-net_http (1.0.1)
+    faraday-net_http_persistent (1.1.0)
     faraday_middleware (1.0.0)
       faraday (~> 1.0)
     ffi (1.15.0)
@@ -124,6 +129,7 @@ GEM
     jbuilder (2.11.2)
       activesupport (>= 5.0.0)
     jmespath (1.4.0)
+    jwt (2.2.3)
     kgio (2.11.3)
     listen (3.5.1)
       rb-fsevent (~> 0.10, >= 0.10.3)
@@ -138,11 +144,29 @@ GEM
     mini_mime (1.0.3)
     minitest (5.14.4)
     msgpack (1.4.2)
+    multi_json (1.15.0)
+    multi_xml (0.6.0)
     multipart-post (2.1.1)
     nio4r (2.5.7)
     nokogiri (1.11.3-x86_64-linux)
       racc (~> 1.4)
-    oj (2.18.5)
+    oauth2 (1.4.7)
+      faraday (>= 0.8, < 2.0)
+      jwt (>= 1.0, < 3.0)
+      multi_json (~> 1.3)
+      multi_xml (~> 0.5)
+      rack (>= 1.2, < 3)
+    oj (3.11.5)
+    omniauth (2.0.4)
+      hashie (>= 3.4.6)
+      rack (>= 1.6.2, < 3)
+      rack-protection
+    omniauth-cognito-idp (0.1.1)
+      jwt
+      omniauth-oauth2
+    omniauth-oauth2 (1.7.1)
+      oauth2 (~> 1.4)
+      omniauth (>= 1.9, < 3)
     pry (0.13.1)
       coderay (~> 1.1)
       method_source (~> 1.0)
@@ -154,8 +178,10 @@ GEM
     public_suffix (4.0.6)
     racc (1.5.2)
     rack (2.2.3)
-    rack-mini-profiler (2.3.1)
+    rack-mini-profiler (2.3.2)
       rack (>= 1.2.0)
+    rack-protection (2.1.0)
+      rack
     rack-test (1.1.0)
       rack (>= 1.0, < 3)
     rails (6.1.3.1)
@@ -212,7 +238,7 @@ GEM
     thor (1.1.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
-    unicorn (5.4.1)
+    unicorn (6.0.0)
       kgio (~> 2.6)
       raindrops (~> 0.7)
     unicorn-rails (2.2.1)
@@ -238,17 +264,18 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  aws-sdk-cognitoidentityprovider (~> 1)
   bcrypt (~> 3.1.7)
   better_errors
   binding_of_caller
-  bootsnap (>= 1.4.4)
+  bootsnap (>= 1.7.4)
   byebug
   capybara (>= 3.26)
+  dotenv-rails
   dynamoid (~> 3.7.0)
-  jbuilder (~> 2.7)
+  jbuilder (~> 2.11)
   listen (~> 3.3)
-  oj (~> 2.18.0)
+  oj (~> 3.11.5)
+  omniauth-cognito-idp
   pry-byebug
   pry-rails
   rack-mini-profiler (~> 2.0)
@@ -257,13 +284,13 @@ DEPENDENCIES
   slack-ruby-client
   spring
   tzinfo-data
-  unicorn (~> 5.4.0)
+  unicorn (~> 6.0.0)
   unicorn-rails
   web-console (>= 4.1.0)
   webdrivers
 
 RUBY VERSION
-   ruby 2.6.6p146
+   ruby 3.0.1p64
 
 BUNDLED WITH
    2.2.15

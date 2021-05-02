@@ -4,23 +4,23 @@ git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby '3.0.1'
 
 # Use unicorn as the app server
-gem 'unicorn', '~> 5.4.0'
+gem 'unicorn', '~> 6.0.0'
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails', branch: 'main'
 gem 'rails', '~> 6.1.3', '>= 6.1.3.1'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.7'
+gem 'jbuilder', '~> 2.11'
 # Fast JSON Parser
-gem 'oj', '~> 2.18.0'
+gem 'oj', '~> 3.11.5'
 
 # Use Active Model has_secure_password
 gem 'bcrypt', '~> 3.1.7'
 
 # Reduces boot times through caching; required in config/boot.rb
-gem 'bootsnap', '>= 1.4.4', require: false
+gem 'bootsnap', '>= 1.7.4', require: false
 
-# Amazon's cognito
-gem 'aws-sdk-cognitoidentityprovider', '~> 1'
+# omniauth to Amazon's cognito
+gem 'omniauth-cognito-idp'
 
 # Ruby ORM for Amazon's DynamoDB
 gem 'dynamoid', '~> 3.7.0'
@@ -31,6 +31,8 @@ gem 'slack-ruby-client'
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
+
+  gem 'dotenv-rails'
 end
 
 group :development do
