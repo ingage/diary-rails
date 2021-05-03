@@ -21,6 +21,7 @@ gem 'bootsnap', '>= 1.7.4', require: false
 
 # omniauth to Amazon's cognito
 gem 'omniauth-cognito-idp'
+gem 'omniauth-rails_csrf_protection'
 
 # Ruby ORM for Amazon's DynamoDB
 gem 'dynamoid', '~> 3.7.0'
@@ -30,9 +31,12 @@ gem 'slack-ruby-client'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
-  gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
-
+  gem 'byebug', platforms: %i[mri mingw x64_mingw]
   gem 'dotenv-rails'
+
+  gem 'rubocop', '~> 1', require: false
+  gem 'rubocop-performance', require: false
+  gem 'rubocop-rails', require: false
 end
 
 group :development do
@@ -65,4 +69,4 @@ group :test do
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
-gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]

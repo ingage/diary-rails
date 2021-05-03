@@ -1,0 +1,19 @@
+AllCops:
+  TargetRubyVersion: 3.0
+  NewCops: enable
+  Exclude:
+    - 'Gemfile'
+    - 'Rakefile'
+    - 'public/**/*'
+    - 'tmp/**/*'
+    - 'log/**/*'
+    - 'vendor/bundle/**/*'
+    - 'test/**/*'  # rspec に多分変えるのでわざわざチェックしない
+
+require:
+  - rubocop-rails
+  - rubocop-performance
+
+# 日本語のコメントは入れたいの外した
+Style/AsciiComments:
+  Enabled: false
