@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
@@ -46,8 +48,8 @@ group :development do
   gem 'web-console', '>= 4.1.0'
   # Display performance information such as SQL time and flame graphs for each request in your browser.
   # Can be configured to work on production as well see: https://github.com/MiniProfiler/rack-mini-profiler/blob/master/README.md
-  gem 'rack-mini-profiler', '~> 2.0'
   gem 'listen', '~> 3.3'
+  gem 'rack-mini-profiler', '~> 2.0'
 
   # 従来の rails s で unicorn を呼び出せるようにする
   gem 'unicorn-rails'
@@ -56,8 +58,8 @@ group :development do
   gem 'binding_of_caller'
 
   # console 表示
-  gem 'pry-rails'        # rails console で pry を使う
   gem 'pry-byebug'       # debugger
+  gem 'pry-rails'        # rails console で pry を使う
 end
 
 group :test do

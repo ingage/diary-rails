@@ -2,13 +2,11 @@ AllCops:
   TargetRubyVersion: 3.0
   NewCops: enable
   Exclude:
-    - 'Gemfile'
-    - 'Rakefile'
-    - 'public/**/*'
-    - 'tmp/**/*'
     - 'log/**/*'
-    - 'vendor/bundle/**/*'
+    - 'public/**/*'
     - 'test/**/*'  # rspec に多分変えるのでわざわざチェックしない
+    - 'tmp/**/*'
+    - 'vendor/bundle/**/*'
 
 require:
   - rubocop-rails
