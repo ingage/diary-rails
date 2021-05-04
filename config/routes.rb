@@ -11,7 +11,7 @@ Rails.application.routes.draw do
 
   direct :cognito_logout do
     query = {
-      client_id: ENV['CLIENT_ID'],
+      client_id:  ENV['CLIENT_ID'],
       logout_uri: root_url
     }.to_param
     "#{ENV['COGNITO_USER_POOL_SITE']}/logout?#{query}"

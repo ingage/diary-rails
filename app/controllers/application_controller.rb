@@ -4,6 +4,10 @@
 # base class for controller in application
 #
 class ApplicationController < ActionController::Base
+
+  protect_from_forgery prepend: true, with: :exception
+  before_action :authenticate_user!
+
   private
 
   def authenticate_user!
@@ -11,8 +15,10 @@ class ApplicationController < ActionController::Base
   end
 
   def signed_in?
+    # TODO: トークンによるログイン検証
     session[:userinfo].present?
   end
 
   helper_method :signed_in?
+
 end

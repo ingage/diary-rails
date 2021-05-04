@@ -30,7 +30,6 @@ Rails.application.configure do
     }
   else
     config.action_controller.perform_caching = false
-
     config.cache_store = :null_store
   end
 
@@ -42,8 +41,6 @@ Rails.application.configure do
 
   # Tell Active Support which deprecation messages to disallow.
   config.active_support.disallowed_deprecation_warnings = []
-
-  config.session_store = :cache_store
 
   # Raises error for missing translations.
   # config.i18n.raise_on_missing_translations = true

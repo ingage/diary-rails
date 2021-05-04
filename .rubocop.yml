@@ -12,6 +12,151 @@ require:
   - rubocop-rails
   - rubocop-performance
 
+
+###########################################################
+# Layout
+###########################################################
+
+# Class 定義の周りの空行は name-space (class, module) のとき以外は１行空けるようにする
+Layout/EmptyLinesAroundClassBody:
+  EnforcedStyle: empty_lines_except_namespace
+
+# Module 定義の周りの空行は name-space (class, module) のとき以外は１行空けるようにする
+Layout/EmptyLinesAroundModuleBody:
+  EnforcedStyle: empty_lines_except_namespace
+
+# 不要なスペースがないかをチェックする
+Layout/ExtraSpacing:
+  AllowForAlignment: true
+  AllowBeforeTrailingComments: true
+
+Layout/HashAlignment:
+  EnforcedHashRocketStyle: table
+  EnforcedColonStyle: table
+  EnforcedLastArgumentHashStyle: always_inspect # default
+
+
+###########################################################
+# Metrics
+###########################################################
+
+Metrics/AbcSize:
+  Max: 15 # default: 15 (30までは許せるかな
+
+Metrics/BlockLength:
+  Max: 25 # default: 25 (40までは許せるかな
+
+# if, loop などの block-nest count
+Metrics/BlockNesting:
+  Max: 3 # default: 3 (これは変更できないな
+  CountBlocks: false # default: false
+
+Metrics/ClassLength:
+  Max: 100 # default:100 (200 までは許せるかな
+
+# 循環的複雑度 のチェック
+Metrics/CyclomaticComplexity:
+  Max: 6 # default: 6 (20 までは許せるかな
+
+Metrics/MethodLength:
+  Max: 10 # default: 10 (30 までは許せるかな
+
+Metrics/ModuleLength:
+  Max: 100 # default:100 (200 までは許せるかな
+
+# メソッド内の分岐の数（複雑度）
+Metrics/PerceivedComplexity:
+  Max: 7 # default: 7 (15 までは許せるかな
+
+# method parameter count
+Metrics/ParameterLists:
+  Max: 4
+  CountKeywordArgs: true # 厳し目に keyword args も含めてカウント
+
+
+###########################################################
+# Style
+###########################################################
+
 # 日本語のコメントは入れたいの外した
 Style/AsciiComments:
   Enabled: false
+
+# %Q 方式を採用
+Style/BarePercentLiterals:
+  EnforcedStyle: percent_q
+
+# Module 内のクラス表現は class Module::Class do ... end にする
+Style/ClassAndModuleChildren:
+  EnforcedStyle: compact
+
+# is_a? を採用（デフォルトだが明示しておく）
+Style/ClassCheck:
+  EnforcedStyle: is_a?
+
+# 空メソッドの場合にも展開する
+Style/EmptyMethod:
+  EnforcedStyle: expanded
+
+# 文字列は sprintf でフォーマットする
+Style/FormatString:
+  EnforcedStyle: sprintf
+
+# Hash の書き方を統一する
+# https://docs.rubocop.org/rubocop/0.86/cops_style.html#stylehashsyntax
+Style/HashSyntax:
+  EnforcedStyle: no_mixed_keys
+
+# Lambda の定義は ->() {...} に統一する
+Style/Lambda:
+  EnforcedStyle: literal
+
+# 定数は不変値のみにする
+Style/MutableConstant:
+  EnforcedStyle: literals
+
+# 適用桁数を 6 にする (100000 -> 100_000)
+Style/NumericLiterals:
+  MinDigits: 6
+  Strict: true
+
+# percent literal のカッコの統一
+Style/PercentLiteralDelimiters:
+  PreferredDelimiters:
+    '%i': '()'
+    '%I': '()'
+    '%w': '()'
+    '%W': '()'
+    '%r': '{}'
+
+# 正規表現の書き方を統一する
+Style/RegexpLiteral:
+  # slashes, percent_r, mixed
+  EnforcedStyle: slashes # (default)
+  AllowInnerSlashes: true # '/' を含む正規表現も /\// と書ける
+
+# symbol の配列は %i を使う
+Style/SymbolArray:
+  MinSize: 4
+
+# 三項演算子の条件のカッコに入力パターンついて
+Style/TernaryParentheses:
+  EnforcedStyle: require_parentheses_when_complex
+  AllowSafeAssignment: false
+
+# メソッドの最後の引数のカンマ
+Style/TrailingCommaInArguments:
+  EnforcedStyleForMultiline: comma
+
+# 配列の最後の引数のカンマ
+Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: comma
+
+# 文字列の配列は %w を使う
+Style/WordArray:
+  MinSize: 4
+
+# 比較演算子使用時の左辺の値
+Style/YodaCondition:
+  EnforcedStyle: forbid_for_equality_operators_only
+
