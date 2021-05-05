@@ -3,3 +3,5 @@
 <p><%= session[:_user_me].inspect %></p>
 
 <p><%= link_to 'logout', logout_path, method: :delete %></p>
+
+<%= javascript_bundle_tag 'dashboard' %>

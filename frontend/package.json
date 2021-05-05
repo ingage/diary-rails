@@ -1,0 +1,13 @@
+{
+  "devDependencies": {
+    "glob": "^7.1.6",
+    "webpack": "^5.36.2",
+    "webpack-cli": "^4.6.0",
+    "webpack-dev-server": "^3.11.2",
+    "webpack-manifest-plugin": "^3.1.1"
+  },
+  "scripts": {
+    "compile": "webpack --config webpack.config.js",
+    "s": "webpack serve --color --mode development"
+  }
+}

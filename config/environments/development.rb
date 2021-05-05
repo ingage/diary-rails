@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 require 'active_support/core_ext/integer/time'
+require_relative '../../lib/middlewares/assets_path_proxy.rb'
 
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
@@ -54,4 +55,7 @@ Rails.application.configure do
 
   # Uncomment if you wish to allow Action Cable access from any origin.
   # config.action_cable.disable_request_forgery_protection = true
+
+  # javascript, stylesheet を webpack server にリダイレクトする
+  config.middleware.use AssetsPathProxy, ssl_verify_none: true
 end

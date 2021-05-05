@@ -35,7 +35,9 @@ module DiaryRails
     config.load_defaults 6.1
 
     config.time_zone = 'Asia/Tokyo'
-    # config.eager_load_paths << Rails.root.join("extras")
+
+    config.paths.add 'lib',             eager_load: true
+    config.paths.add 'lib/middlewares', eager_load: true
 
   end
 end

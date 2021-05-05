@@ -66,6 +66,9 @@ group :development do
   # console 表示
   gem 'pry-byebug'       # debugger
   gem 'pry-rails'        # rails console で pry を使う
+
+  # rails server で /assets を proxy するのに利用
+  gem 'rack-proxy'
 end
 
 group :test do
