@@ -24,18 +24,28 @@ class ApplicationController < ActionController::Base
     return false if verified_at.nil?
 
     # 1分以内に検証している場合は、再検証しない
-    return true if Time.zone.now < Time.zone.at(verified_at) + VERIFY_INTERVAL_TIME.seconds
+    return true if verified?(userinfo)
 
     # cognito から user 情報を取得
-    user = COGNITO_CLIENT.get_user({
-                                     access_token: userinfo[:credentials]['token'],
-                                   })
+    user = COGNITO_CLIENT.get_user({ access_token: userinfo[:credentials]['token'] })
     user.present?
+  rescue Aws::CognitoIdentityProvider::Errors::NotAuthorizedException => e
+    Rails.logger.debug("e.class:   #{e.class}")
+    Rails.logger.debug("e.message: #{e.message}")
+
+    false
   end
   helper_method :signed_in?
 
-  def get_user_list(cognito_access_token)
-    COGNITO_CLIENT.get_user({ access_token: cognito_access_token })
+  #
+  # 検証済みかどうか？
+  #
+  def verified?(userinfo)
+    verified_at = (userinfo || {}).fetch(:verified_at, nil)
+    reverify_at = Time.zone.at(verified_at) + VERIFY_INTERVAL_TIME.seconds
+
+    # 再検証時刻を過ぎていなければ、検証済みとする
+    Time.zone.now < reverify_at
   end
 
 end
