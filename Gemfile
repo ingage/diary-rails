@@ -25,6 +25,9 @@ gem 'bootsnap', '>= 1.7.4', require: false
 gem 'omniauth-cognito-idp'
 gem 'omniauth-rails_csrf_protection'
 
+# for verify token with cognito
+gem 'aws-sdk-cognitoidentityprovider'
+
 # use redis-store for session
 gem 'redis-actionpack'
 

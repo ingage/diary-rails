@@ -11,7 +11,7 @@ when 'development'
     write_timeout:   0.2, # Defaults to 1 second
 
     # different key for app server
-    namespace:       'diary-rails'
+    namespace:       'diary-rails',
   }
 when 'staging', 'production'
   # STG, PROD環境では elasticache にキャッシュする
@@ -26,7 +26,7 @@ when 'staging', 'production'
     reconnect_attempts:  10,
 
     # different key for app server
-    namespace:           'diary-rails'
+    namespace:           'diary-rails',
   }
 else
   # テスト環境その他の環境ではキャッシュと同じ設定にする

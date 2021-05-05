@@ -6,11 +6,25 @@
 class SessionsController < ApplicationController
 
   # ログイン・ログアウト処理では認証処理はスキップする
-  before_action :authenticate_user!
+  skip_before_action :authenticate_user!
 
-  def show
+  #
+  # GET /login
+  #
+  def login
+    reset_session
   end
 
+  #
+  # GET /logout
+  #
+  def logout
+    redirect_to login_url
+  end
+
+  #
+  # DELETE /logout
+  #
   def destroy
     reset_session
     redirect_to cognito_logout_url

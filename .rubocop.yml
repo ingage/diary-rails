@@ -40,6 +40,8 @@ Layout/HashAlignment:
 # Metrics
 ###########################################################
 
+# 一応妥当な数値っぽい
+# refs: https://nacl-ltd.github.io/2016/02/23/ruby-abcmetrics.html
 Metrics/AbcSize:
   Max: 15 # default: 15 (30までは許せるかな
 
@@ -150,6 +152,9 @@ Style/TrailingCommaInArguments:
 
 # 配列の最後の引数のカンマ
 Style/TrailingCommaInArrayLiteral:
+  EnforcedStyleForMultiline: comma
+
+Style/TrailingCommaInHashLiteral:
   EnforcedStyleForMultiline: comma
 
 # 文字列の配列は %w を使う

@@ -65,6 +65,9 @@ GEM
     ast (2.4.2)
     aws-eventstream (1.1.1)
     aws-partitions (1.449.0)
+    aws-sdk-cognitoidentityprovider (1.51.0)
+      aws-sdk-core (~> 3, >= 3.112.0)
+      aws-sigv4 (~> 1.1)
     aws-sdk-core (3.114.0)
       aws-eventstream (~> 1, >= 1.0.2)
       aws-partitions (~> 1, >= 1.239.0)
@@ -306,6 +309,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
+  aws-sdk-cognitoidentityprovider
   bcrypt (~> 3.1)
   better_errors
   binding_of_caller
