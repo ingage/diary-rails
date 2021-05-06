@@ -18,13 +18,12 @@ class ApplicationController < ActionController::Base
 
   def signed_in?
     userinfo = session[:_user_me]
-    verified_at = (userinfo || {}).fetch(:verified_at, nil)
 
     # 認証時間が分からなければ、ログイン画面に遷移
-    return false if verified_at.nil?
+    return false unless verified?(userinfo)
 
     # 1分以内に検証している場合は、再検証しない
-    return true if verified?(userinfo)
+    return true unless need_reverify?(userinfo)
 
     # cognito から user 情報を取得
     user = COGNITO_CLIENT.get_user({ access_token: userinfo[:credentials]['token'] })
@@ -37,15 +36,23 @@ class ApplicationController < ActionController::Base
   end
   helper_method :signed_in?
 
+  def verified?(userinfo)
+    verified_at = (userinfo || {}).fetch(:verified_at, nil)
+    verified_at.present?
+  end
+
   #
   # 検証済みかどうか？
   #
-  def verified?(userinfo)
+  def need_reverify?(userinfo)
     verified_at = (userinfo || {}).fetch(:verified_at, nil)
     reverify_at = Time.zone.at(verified_at) + VERIFY_INTERVAL_TIME.seconds
 
+    # 認証時間が分からなければ、未検証とする
+    return false if verified_at.nil?
+
     # 再検証時刻を過ぎていなければ、検証済みとする
-    Time.zone.now < reverify_at
+    Time.zone.now > reverify_at
   end
 
 end
