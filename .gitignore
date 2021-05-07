@@ -72,3 +72,8 @@ yarn-debug.log*
 
 # Ignore RubyMine config
 /.idea
+
+# dynamodb-local data
+/dynamodb_data
+# redis data
+/redis

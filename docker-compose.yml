@@ -1,0 +1,42 @@
+version: '3'
+services:
+  web:
+    container_name: journally-web
+    build:
+      context: .
+      dockerfile: Dockerfile
+    env_file: .env
+    environment:
+      RAILS_ENV: development
+      REDIS_HOST: redis
+    restart: always
+    command: bash -c "rm -f /journally/tmp/pids/server.pid; bundle exec rails s -p 3000 -b '0.0.0.0'"
+#    healthcheck:
+#      test: ["CMD-SHELL", "wget -q --spider --proxy=off localhost:3000/health || exit 1"]
+    ports:
+      - "3007:3000" # コンテナ側は3000 / ホスト側は3007
+    depends_on:
+      - dynamodb
+      - redis
+    volumes:
+      - .:/journally
+
+  dynamodb:
+    container_name: journally-db
+    image: amazon/dynamodb-local
+    ports:
+      - 8000:8000
+    command: -jar DynamoDBLocal.jar -dbPath /dynamodb_data
+    volumes:
+      - $PWD/dynamodb_data:/dynamodb_data
+
+  redis:
+    container_name: journally-redis
+    restart: always
+    image: redis:6.0-alpine
+    ports:
+      - 6379:6379
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+    volumes:
+      - ./redis:/data

@@ -1,24 +1,85 @@
-# README
+# Journally
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Ingage Inc. 用の日報登録サービス。
 
-Things you may want to cover:
+## 開発環境構築
 
-* Ruby version
+### 前準備
 
-* System dependencies
+`.env` を RAILS_ROOT に配置
 
-* Configuration
+```
+# AWS
+AWS_REGION=ap-northeast-1
+AWS_ACCESS_KEY_ID=<aws key here>
+AWS_SECRET_ACCESS_KEY=<aws secret here>
+```
 
-* Database creation
+### 初回起動
 
-* Database initialization
+```
+# Docker ビルド
+$ docker-compose build
+# 各コンテナの起動 -d: background
+$ docker-compose up -d
+```
 
-* How to run the test suite
+Mac から http://localhost:3007 でアクセスする。
 
-* Services (job queues, cache servers, search engines, etc.)
+### 初期データ投入
 
-* Deployment instructions
+TBD
 
-* ...
+dynamodb にテーブル作って、初期データを投入する感じ
+
+## 日々の開発運用
+
+### 起動
+
+```
+# foreground
+$ docker-compose up
+# background
+$ docker-compose up -d
+```
+
+### ログ確認
+
+```
+$ docker-compose logs web
+# 末尾5行のみ
+$ docker-compose logs --tail=5 web
+```
+
+### コマンド実行
+
+```
+# bundle install
+$ docker-compose run web bundle install
+```
+
+### シェルで入る
+
+```
+$ docker-compose exec web /bin/bash
+```
+
+### 再起動
+
+```
+$ docker-compose restart web
+```
+
+### 停止
+
+```
+$ docker-compose down
+# 全 image 削除
+$ docker-compose down --rmi all
+```
+
+### プロセス確認
+
+```
+$ docker-compose ps
+```
