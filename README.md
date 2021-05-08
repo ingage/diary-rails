@@ -49,6 +49,8 @@ $ docker-compose up -d
 $ docker-compose logs web
 # 末尾5行のみ
 $ docker-compose logs --tail=5 web
+# tail -f
+$ docker-compose logs -f web
 ```
 
 ### コマンド実行
