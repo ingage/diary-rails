@@ -23,9 +23,8 @@ RUN apt-get update && apt-get install --no-install-recommends -y \
     less \
     curl
 
-ENV LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libjemalloc.so.2
-
-ENV LANG=C.UTF-8 \
+ENV LD_PRELOAD=/usr/lib/x86_64-linux-gnu/libjemalloc.so.2 \
+    LANG=C.UTF-8 \
     TZ=Asia/Tokyo \
     APP_ROOT=/journally \
     YARN_VERSION=1.22.5 \
