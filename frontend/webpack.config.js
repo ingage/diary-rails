@@ -25,9 +25,9 @@ module.exports = {
   },
 
   devServer: {
-    host: 'localhost',
-    port: 3035,
-    publicPath: 'http://localhost:3035/assets/',
+    host: '0.0.0.0',
+    port: 3040,
+    publicPath: '/assets/',
     contentBase: path.resolve(__dirname, '../public/assets'),
     hot: true,
     disableHostCheck: true,

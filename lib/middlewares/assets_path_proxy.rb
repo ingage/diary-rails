@@ -12,7 +12,7 @@ class AssetsPathProxy < Rack::Proxy
     return @app.call(env) unless proxy_webpack_server?(env)
 
     if Rails.env.development?
-      dev_server = env['HTTP_HOST'].gsub(':3000', ':3035')
+      dev_server = "#{ENV['WEBPACK_HOST']}:#{ENV['WEBPACK_PORT']}"
       env['HTTP_HOST']               = dev_server
       env['HTTP_X_FORWARDED_HOST']   = dev_server
       env['HTTP_X_FORWARDED_SERVER'] = dev_server

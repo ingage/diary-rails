@@ -22,10 +22,14 @@ module WebpackBundleHelper
 
   private
 
-  MANIFEST_PATH = Rails.root.join('public/assets/manifest.json')
+  MANIFEST_PATH = "http://#{ENV['WEBPACK_HOST']}:#{ENV['WEBPACK_PORT']}/assets/manifest.json"
 
   def manifest
-    @manifest ||= JSON.parse(File.read(MANIFEST_PATH))
+    uri = URI(MANIFEST_PATH)
+    http = Net::HTTP.new(uri.host, uri.port)
+    http.use_ssl = (uri.scheme == 'https')
+    response = http.get(uri.request_uri)
+    @manifest ||= JSON.parse(response.body)
   end
 
   def asset_bundle_path(entry, **options)
