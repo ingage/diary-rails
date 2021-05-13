@@ -26,23 +26,24 @@ class ApplicationController < ActionController::Base
     return true unless need_reverify?(userinfo)
 
     # cognito から user 情報を取得
-    user = COGNITO_CLIENT.get_user({ access_token: userinfo[:credentials]['token'] })
-    user.present?
+    reverify(userinfo)
   rescue Aws::CognitoIdentityProvider::Errors::NotAuthorizedException => e
     Rails.logger.debug("e.class:   #{e.class}")
     Rails.logger.debug("e.message: #{e.message}")
-
     false
   end
   helper_method :signed_in?
 
+  #
+  # 認証済みかどうか？
+  #
   def verified?(userinfo)
     verified_at = (userinfo || {}).fetch(:verified_at, nil)
     verified_at.present?
   end
 
   #
-  # 検証済みかどうか？
+  # 再検証が必要かどうか？
   #
   def need_reverify?(userinfo)
     verified_at = (userinfo || {}).fetch(:verified_at, nil)
@@ -53,6 +54,13 @@ class ApplicationController < ActionController::Base
 
     # 再検証時刻を過ぎていなければ、検証済みとする
     Time.zone.now > reverify_at
+  end
+
+  def reverify(userinfo)
+    user = COGNITO_CLIENT.get_user({ access_token: userinfo[:access_token] })
+    raise Aws::CognitoIdentityProvider::Errors::NotAuthorizedException, 'reverify error' if user.blank?
+
+    session[:_user_me][:verified_at] = Time.zone.now
   end
 
 end

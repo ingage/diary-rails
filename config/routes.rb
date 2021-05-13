@@ -3,7 +3,8 @@
 Rails.application.routes.draw do
   root   to: redirect('/dashboard')
 
-  get    'login'  => 'sessions#login'
+  get    'login'  => 'sessions#show'
+  post   'login'  => 'sessions#login'
   get    'logout' => 'sessions#logout'
   delete 'logout' => 'sessions#destroy'
 
@@ -12,8 +13,8 @@ Rails.application.routes.draw do
 
   direct :cognito_logout do
     query = {
-      client_id:  ENV['CLIENT_ID'],
-      logout_uri: root_url,
+      client_id:  ENV['COGNITO_CLIENT_ID'],
+      logout_uri: login_url,
     }.to_param
     "#{ENV['COGNITO_USER_POOL_SITE']}/logout?#{query}"
   end

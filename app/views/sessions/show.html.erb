@@ -1,0 +1,16 @@
+<h1>Home#show</h1>
+<p>Find me in app/views/sessions/show.html.erb</p>
+
+<h1>RoR Cognito Sample</h1>
+<p>Step 1 - Login.</p>
+<%= button_to 'Login', '/auth/cognito-idp', method: :post %>
+
+
+<h1>cognito api</h1>
+<%= form_with url: login_path, method: :post do |form| %>
+  <%= form.text_field :username %>
+  <%= form.password_field :password %>
+  <%= form.submit %>
+<% end %>
+
+<%= javascript_bundle_tag 'login' %>
