@@ -1,6 +1,10 @@
 {
   "devDependencies": {
+    "css-loader": "^5.2.4",
     "glob": "^7.1.6",
+    "sass": "^1.32.13",
+    "sass-loader": "^11.1.0",
+    "style-loader": "^2.0.0",
     "webpack": "^5.36.2",
     "webpack-cli": "^4.6.0",
     "webpack-dev-server": "^3.11.2",
@@ -9,5 +13,8 @@
   "scripts": {
     "compile": "webpack --config webpack.config.js",
     "s": "webpack serve --color --mode development"
+  },
+  "dependencies": {
+    "uikit": "^3.6.21"
   }
 }

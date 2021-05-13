@@ -1,16 +1,23 @@
-<h1>Home#show</h1>
-<p>Find me in app/views/sessions/show.html.erb</p>
-
-<h1>RoR Cognito Sample</h1>
-<p>Step 1 - Login.</p>
-<%= button_to 'Login', '/auth/cognito-idp', method: :post %>
-
-
-<h1>cognito api</h1>
-<%= form_with url: login_path, method: :post do |form| %>
-  <%= form.text_field :username %>
-  <%= form.password_field :password %>
-  <%= form.submit %>
-<% end %>
+<div class="uk-container uk-container-xsmall uk-position-relative">
+  <div class="uk-card uk-card-default uk-card-body uk-margin-xlarge-top uk-margin-auto uk-width-medium">
+    <%= form_with url: login_path, method: :post, class: 'uk-form-stacked' do |form| %>
+      <div class="uk-margin">
+        <label class="uk-form-label uk-text-muted" for="username">メールアドレス</label>
+        <div class="uk-form-controls">
+          <%= form.text_field :username, class: 'uk-input' %>
+        </div>
+      </div>
+      <div class="uk-margin">
+        <label class="uk-form-label uk-text-muted" for="password">パスワード</label>
+        <div class="uk-form-controls">
+          <%= form.password_field :password, class: 'uk-input' %>
+        </div>
+      </div>
+      <div class="uk-margin uk-margin-large-top">
+        <%= form.submit 'ログイン', class: 'uk-button uk-button-secondary uk-width-3-4 uk-align-center' %>
+      </div>
+    <% end %>
+  </div>
+</div>
 
 <%= javascript_bundle_tag 'login' %>
