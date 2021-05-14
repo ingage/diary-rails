@@ -13,8 +13,12 @@ class LoginForm < ApplicationForm
   #
   # Constructor
   #
-  def initialize(params)
-    p = params.permit(:username, :password)
+  def initialize(params = nil)
+    p = if params.present?
+          params.permit(:username, :password)
+        else
+          {}
+        end
     super(p)
   end
 
@@ -25,7 +29,8 @@ class LoginForm < ApplicationForm
     Rails.logger.debug("e.class:   #{e.class}")
     Rails.logger.debug("e.message: #{e.message}")
 
-    self.errors << 'ログインに失敗しました'
+    self.errors.add(:base, 'ログインに失敗しました')
+    return nil
   end
 
 end

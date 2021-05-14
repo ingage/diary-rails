@@ -12,6 +12,7 @@ class SessionsController < ApplicationController
   # GET /login
   #
   def show
+    @form = LoginForm.new
     reset_session
   end
 
@@ -19,11 +20,11 @@ class SessionsController < ApplicationController
   # POST /login
   #
   def login
-    form = LoginForm.new(params)
-    return redirect_to login_url if form.invalid?
+    @form = LoginForm.new(params.require('login_form'))
+    return render :show if @form.invalid?
 
-    response = form.submit
-    return redirect_to login_url if response.nil?
+    response = @form.submit
+    return render :show if response.nil?
 
     save_session(response.authentication_result)
     redirect_to dashboard_url
