@@ -19,12 +19,14 @@ class SessionsController < ApplicationController
   # POST /login
   #
   def login
-    resp = admin_initiate_auth_with_pass(login_params[:username], login_params[:password])
-    save_session(resp.authentication_result)
+    form = LoginForm.new(params)
+    return redirect_to login_url if form.invalid?
 
+    response = form.submit
+    return redirect_to login_url if response.nil?
+
+    save_session(response.authentication_result)
     redirect_to dashboard_url
-  rescue Aws::CognitoIdentityProvider::Errors::NotAuthorizedException => e
-    # TODO: 認証エラー時の表示
   end
 
   #
@@ -44,33 +46,6 @@ class SessionsController < ApplicationController
   end
 
   private
-
-  def admin_initiate_auth_with_pass(username, password)
-    COGNITO_CLIENT.admin_initiate_auth(
-      user_pool_id:    ENV['COGNITO_USER_POOL_ID'],
-      client_id:       ENV['COGNITO_CLIENT_ID'],
-      auth_flow:       'ADMIN_NO_SRP_AUTH',
-      auth_parameters: {
-        USERNAME:    username,
-        PASSWORD:    password,
-        SECRET_HASH: secret_hash(username),
-      },
-    )
-  end
-
-  def login_params
-    params.permit(:username, :password)
-  end
-
-  def secret_hash(username)
-    Base64.strict_encode64(
-      OpenSSL::HMAC.digest(
-        'sha256',
-        ENV['COGNITO_CLIENT_SECRET'],
-        "#{username}#{ENV['COGNITO_CLIENT_ID']}",
-      ),
-    )
-  end
 
   def save_session(auth_result)
     session[:_user_me] = {

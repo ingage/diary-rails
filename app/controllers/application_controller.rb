@@ -56,8 +56,13 @@ class ApplicationController < ActionController::Base
     Time.zone.now > reverify_at
   end
 
+  #
+  # 再検証する
+  # TODO: access_token が切れたときに refresh_token を使ってのユーザ取得の処理が実装できてない
+  # TODO: repository を直接アクセスしているので usecase 経由にする
+  #
   def reverify(userinfo)
-    user = COGNITO_CLIENT.get_user({ access_token: userinfo[:access_token] })
+    user = CognitoRepository.me(userinfo[:access_token])
     raise Aws::CognitoIdentityProvider::Errors::NotAuthorizedException, 'reverify error' if user.blank?
 
     session[:_user_me][:verified_at] = Time.zone.now

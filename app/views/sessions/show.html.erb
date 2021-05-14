@@ -4,7 +4,7 @@
       <div class="uk-margin">
         <label class="uk-form-label uk-text-muted" for="username">メールアドレス</label>
         <div class="uk-form-controls">
-          <%= form.text_field :username, class: 'uk-input' %>
+          <%= form.text_field :username, class: ['uk-input', @errors.present? ? 'uk-form-danger' : ''] %>
         </div>
       </div>
       <div class="uk-margin">
