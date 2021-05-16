@@ -1,10 +1,9 @@
+# frozen_string_literal: true
+
+#
+# Cognito 呼び出し用リポジトリ
+#
 class CognitoRepository < ApplicationRepository
-
-  private
-
-  # private constructor
-  def initialize
-  end
 
   # class methods
   class << self
@@ -37,6 +36,7 @@ class CognitoRepository < ApplicationRepository
         ),
       )
     end
+
   end
 
 end
