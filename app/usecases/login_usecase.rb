@@ -5,21 +5,13 @@
 #
 class LoginUsecase < ApplicationUsecase
 
-  def self.call(hash)
-    new(**hash).call
-  end
+  # class methods
+  class << self
 
-  #
-  # Constructor
-  #
-  def initialize(username:, password:)
-    super
-    @username = username
-    @password = password
-  end
+    def call(username:, password:)
+      CognitoRepository.login(username, password)
+    end
 
-  def call
-    CognitoRepository.login(@username, @password)
   end
 
 end

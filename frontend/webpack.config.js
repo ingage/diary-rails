@@ -33,6 +33,10 @@ module.exports = {
   },
   module: {
     rules: [{
+      test: /\.ts$/,
+      // TypeScript をコンパイルする
+      use: 'ts-loader',
+    }, {
       // CSS, Sassファイルの読み込みとコンパイル
       test: /\.(c|sc)ss$/,
       use: [{
@@ -64,7 +68,20 @@ module.exports = {
       type: "asset/inline",
     }],
   },
-
+  // import 文で .ts ファイルを解決するため
+  // これを定義しないと import 文で拡張子を書く必要が生まれる。
+  // フロントエンドの開発では拡張子を省略することが多いので、
+  // 記載したほうがトラブルに巻き込まれにくい。
+  resolve: {
+    // 拡張子を配列で指定
+    extensions: ['.js', '.ts'],
+    // Webpackで利用するときの設定
+    alias: {
+      vue: "vue/dist/vue.js",
+      '@':  path.resolve(__dirname, './typescripts'),
+      '@c': path.resolve(__dirname, './components'),
+    },
+  },
 
   devServer: {
     host: '0.0.0.0',

@@ -1,0 +1,24 @@
+{
+  "compilerOptions": {
+    "sourceMap": true,
+    "target": "ES5", // TSはECMAScript 5に変換
+    "module": "ES2015", // TSのモジュールはES Modulesとして出力
+    // import Vue from 'vue' の書き方を許容する
+    "allowSyntheticDefaultImports": true,
+    "lib": [
+      "DOM",
+      "es2020"
+    ],
+    "moduleResolution": "node",
+    // デコレーターを有効に設定
+    "experimentalDecorators": true,
+
+    "baseUrl": "./",
+    "paths": {
+      "@":   ["typescripts"],
+      "@/*": ["typescripts/*"],
+      "@c":   ["components"],
+      "@c/*": ["components/*"]
+    }
+  }
+}

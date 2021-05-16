@@ -5,6 +5,8 @@
     "sass": "^1.32.13",
     "sass-loader": "^11.1.0",
     "style-loader": "^2.0.0",
+    "ts-loader": "^9.1.2",
+    "typescript": "^4.2.4",
     "webpack": "^5.36.2",
     "webpack-cli": "^4.6.0",
     "webpack-dev-server": "^3.11.2",
@@ -15,6 +17,8 @@
     "s": "webpack serve --color --mode development"
   },
   "dependencies": {
-    "uikit": "^3.6.21"
+    "@vue/composition-api": "^1.0.0-rc.8",
+    "uikit": "^3.6.21",
+    "vue": "^2.6.12"
   }
 }

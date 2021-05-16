@@ -4,5 +4,8 @@
 # Usecase の基底クラス
 #
 class ApplicationUsecase
-  # Usecase の共通処理
+
+  # private constructor
+  private_class_method :new
+
 end
