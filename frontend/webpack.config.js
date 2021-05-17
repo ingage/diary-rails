@@ -2,6 +2,7 @@ const glob = require("glob")
 const path = require("path")
 
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
+const { VueLoaderPlugin } = require('vue-loader')
 
 const MODE = 'development';
 
@@ -9,7 +10,7 @@ const MODE = 'development';
 const enabledSourceMap = MODE === 'development';
 
 let entries = {}
-glob.sync('./entries/*.js').map(file => {
+glob.sync('./entries/*.[jt]s').map(file => {
   let name = file.split('/')[2].split('.')[0]
   entries[name] = file
 })
@@ -19,13 +20,13 @@ module.exports = {
   // development に設定するとソースマップ有効でJSファイルが出力される
   mode: MODE,
   entry: entries,
-
   plugins: [
     new WebpackManifestPlugin({
       fileName: 'manifest.json',
       publicPath: "/assets/",
       writeToFileEmit: true,
     }),
+    new VueLoaderPlugin(),
   ],
   output: {
     filename: "javascripts/[name]-[hash].js",
@@ -33,9 +34,19 @@ module.exports = {
   },
   module: {
     rules: [{
-      test: /\.ts$/,
       // TypeScript をコンパイルする
-      use: 'ts-loader',
+      test: /\.ts$/,
+      exclude: /node_modules/,
+      use: [{
+        loader: 'ts-loader',
+        options: {
+          appendTsSuffixTo: [/\.vue$/],
+          transpileOnly: true
+        },
+      }],
+    }, {
+      test: /\.vue$/,
+      use: 'vue-loader'
     }, {
       // CSS, Sassファイルの読み込みとコンパイル
       test: /\.(c|sc)ss$/,
