@@ -2,7 +2,8 @@ const glob = require("glob")
 const path = require("path")
 
 const { WebpackManifestPlugin } = require('webpack-manifest-plugin');
-const { VueLoaderPlugin } = require('vue-loader')
+const { VueLoaderPlugin } = require('vue-loader');
+const ESLintPlugin = require('eslint-webpack-plugin');
 
 const MODE = 'development';
 
@@ -27,6 +28,15 @@ module.exports = {
       writeToFileEmit: true,
     }),
     new VueLoaderPlugin(),
+    new ESLintPlugin({
+      extensions: ['js', 'ts'],
+      files: [
+        'components/**/*',
+        'entries/**/*',
+        'lib/**/*',
+      ],
+      fix: true,
+    }),
   ],
   output: {
     filename: "javascripts/[name]-[hash].js",
@@ -89,7 +99,7 @@ module.exports = {
     // Webpackで利用するときの設定
     alias: {
       vue: "vue/dist/vue.js",
-      '@':  path.resolve(__dirname, './typescripts'),
+      '@':  path.resolve(__dirname, './lib'),
       '@c': path.resolve(__dirname, './components'),
     },
   },

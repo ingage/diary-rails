@@ -15,8 +15,8 @@
 
     "baseUrl": "./",
     "paths": {
-      "@":   ["typescripts"],
-      "@/*": ["typescripts/*"],
+      "@":   ["lib"],
+      "@/*": ["lib/*"],
       "@c":   ["components"],
       "@c/*": ["components/*"]
     }

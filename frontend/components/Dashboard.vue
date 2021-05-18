@@ -3,16 +3,16 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "@vue/composition-api";
+import { defineComponent } from '@vue/composition-api';
 // import TodoListPage from "@/view/components/TodoListPage.vue";
-import DashboardModule from "@/modules/dashboard_module";
+import DashboardModule from '@/modules/dashboard_module';
 export default defineComponent({
   // components: {
   //   TodoListPage
   // },
   setup() {
     DashboardModule.get().setup();
-  }
+  },
 });
 </script>
 

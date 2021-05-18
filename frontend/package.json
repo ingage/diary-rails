@@ -1,7 +1,17 @@
 {
   "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^4.23.0",
+    "@typescript-eslint/parser": "^4.23.0",
+    "@vue/eslint-config-typescript": "^7.0.0",
     "css-loader": "^5.2.4",
+    "eslint": "^7.26.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-plugin-import": "^2.23.2",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-vue": "^7.9.0",
+    "eslint-webpack-plugin": "^2.5.4",
     "glob": "^7.1.6",
+    "prettier": "^2.3.0",
     "sass": "^1.32.13",
     "sass-loader": "^11.1.0",
     "style-loader": "^2.0.0",
@@ -15,7 +25,8 @@
     "webpack-manifest-plugin": "^3.1.1"
   },
   "scripts": {
-    "compile": "webpack --config webpack.config.js",
+    "lint": "eslint entries/**/* components/**/* lib/**/*",
+    "build": "webpack --config webpack.config.js",
     "s": "webpack serve --color --mode development"
   },
   "dependencies": {
