@@ -1,4 +1,4 @@
-import '../styles/login.scss';
+import '../assets/styles/login.scss';
 
 import UIkit from 'uikit';
 import Icons from 'uikit/dist/js/uikit-icons';

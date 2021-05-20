@@ -1,15 +1,18 @@
 {
   "devDependencies": {
+    "@mdi/font": "^5.9.55",
     "@typescript-eslint/eslint-plugin": "^4.23.0",
     "@typescript-eslint/parser": "^4.23.0",
     "@vue/eslint-config-typescript": "^7.0.0",
     "css-loader": "^5.2.4",
+    "deepmerge": "^4.2.2",
     "eslint": "^7.26.0",
     "eslint-config-prettier": "^8.3.0",
     "eslint-plugin-import": "^2.23.2",
     "eslint-plugin-prettier": "^3.4.0",
     "eslint-plugin-vue": "^7.9.0",
     "eslint-webpack-plugin": "^2.5.4",
+    "file-loader": "^6.2.0",
     "glob": "^7.1.6",
     "prettier": "^2.3.0",
     "sass": "^1.32.13",
@@ -25,13 +28,14 @@
     "webpack-manifest-plugin": "^3.1.1"
   },
   "scripts": {
-    "lint": "eslint entries/**/* components/**/* lib/**/*",
+    "lint": "eslint entries/**/* components/**/* lib/**/* plugins/**/*",
     "build": "webpack --config webpack.config.js",
     "s": "webpack serve --color --mode development"
   },
   "dependencies": {
     "@vue/composition-api": "^1.0.0-rc.8",
-    "uikit": "^3.6.21",
-    "vue": "^2.6.12"
+    "uikit": "^3.6.22",
+    "vue": "^2.6.12",
+    "vuetify": "^2.5.0"
   }
 }

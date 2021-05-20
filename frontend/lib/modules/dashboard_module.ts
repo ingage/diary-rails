@@ -7,5 +7,7 @@ export default class DashboardModule {
     return DashboardModule.instance;
   }
 
-  setup(): void {}
+  setup(): void {
+    console.log('setup');
+  }
 }

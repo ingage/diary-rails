@@ -1,6 +1,9 @@
 {
   "compilerOptions": {
     "sourceMap": true,
+    // `this` におけるデータプロパティに対して厳密な推論を可能にします
+    // composition api では `this` を使わないため、多分不要だが vue 公式に載っているので入れておく
+    "strict": true,
     "target": "ES5", // TSはECMAScript 5に変換
     "module": "ES2015", // TSのモジュールはES Modulesとして出力
     // import Vue from 'vue' の書き方を許容する
@@ -12,13 +15,28 @@
     "moduleResolution": "node",
     // デコレーターを有効に設定
     "experimentalDecorators": true,
+    // null check を有効にする
+    "strictNullChecks": true,
 
     "baseUrl": "./",
     "paths": {
       "@":   ["lib"],
       "@/*": ["lib/*"],
       "@c":   ["components"],
-      "@c/*": ["components/*"]
+      "@c/*": ["components/*"],
+      "@p":   ["plugins"],
+      "@p/*": ["plugins/*"]
     }
-  }
+  },
+
+  "include": [
+    "./@type/**/*.d.ts",
+    "./components/**/*.vue",
+    "./entries/**/*.ts",
+    "./lib/**/*.ts",
+    "./plugins/**/*.ts",
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }

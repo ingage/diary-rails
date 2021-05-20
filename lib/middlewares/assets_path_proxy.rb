@@ -18,14 +18,16 @@ class AssetsPathProxy < Rack::Proxy
       env['HTTP_X_FORWARDED_SERVER'] = dev_server
     end
 
-    env['PATH_INFO'] = "/assets/javascripts/#{env['PATH_INFO'].split('/').last}"
+    env['PATH_INFO'] = "/assets/#{env['PATH_INFO'].split('/')[-2..-1].join('/')}"
     super
   end
 
   private
 
   def proxy_webpack_server?(env)
-    env['PATH_INFO'].include?('/javascripts/')
+    %w(/javascripts/ /fonts/).any? do |key|
+      env['PATH_INFO'].include?(key)
+    end
   end
 
 end

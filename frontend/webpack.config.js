@@ -27,16 +27,17 @@ module.exports = {
       publicPath: "/assets/",
       writeToFileEmit: true,
     }),
-    new VueLoaderPlugin(),
     new ESLintPlugin({
+      fix: true,
       extensions: ['js', 'ts'],
       files: [
         'components/**/*',
         'entries/**/*',
         'lib/**/*',
+        'plugins/**/*',
       ],
-      fix: true,
     }),
+    new VueLoaderPlugin(),
   ],
   output: {
     filename: "javascripts/[name]-[hash].js",
@@ -44,14 +45,12 @@ module.exports = {
   },
   module: {
     rules: [{
-      // TypeScript をコンパイルする
       test: /\.ts$/,
-      exclude: /node_modules/,
       use: [{
         loader: 'ts-loader',
         options: {
           appendTsSuffixTo: [/\.vue$/],
-          transpileOnly: true
+          // transpileOnly: true
         },
       }],
     }, {
@@ -59,9 +58,9 @@ module.exports = {
       use: 'vue-loader'
     }, {
       // CSS, Sassファイルの読み込みとコンパイル
-      test: /\.(c|sc)ss$/,
+      test: /\.s(c|a)ss$/,
       use: [{
-        loader: "style-loader", // linkタグに出力する機能
+        loader: "vue-style-loader",
       }, {
         loader: "css-loader", // CSSをバンドルするための機能
         options: {
@@ -80,11 +79,29 @@ module.exports = {
         options: {
           // ソースマップの利用有無
           sourceMap: enabledSourceMap,
+          implementation: require('sass'),
         },
       }],
     }, {
+      test: /\.css$/,
+      use: [{
+        loader: "style-loader", // linkタグに出力する機能
+      }, {
+        loader: 'css-loader',
+      }],
+    }, {
+      test: /\.(eot|svg|ttf|woff|woff2)$/,
+      loader: 'file-loader',
+      options: {
+        name: '[name].[ext]',
+        // 出力先 path
+        outputPath: 'fonts/',
+        // template, css で指定する url path
+        publicPath: `/assets/fonts`,
+      },
+    }, {
       // 対象となるファイルの拡張子
-      test: /\.(gif|png|jpg|eot|wof|woff|ttf|svg)$/,
+      test: /\.(gif|png|jpg|ttf|svg)$/,
       // 画像をBase64として取り込む
       type: "asset/inline",
     }],
@@ -95,12 +112,13 @@ module.exports = {
   // 記載したほうがトラブルに巻き込まれにくい。
   resolve: {
     // 拡張子を配列で指定
-    extensions: ['.js', '.ts'],
+    extensions: ['.vue', '.js', '.ts', '.scss', 'css', ' '],
     // Webpackで利用するときの設定
     alias: {
       vue: "vue/dist/vue.js",
       '@':  path.resolve(__dirname, './lib'),
       '@c': path.resolve(__dirname, './components'),
+      '@p': path.resolve(__dirname, './plugins'),
     },
   },
 
