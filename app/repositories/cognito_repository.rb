@@ -9,16 +9,16 @@ class CognitoRepository < ApplicationRepository
   class << self
 
     def login(username, password)
-      COGNITO_CLIENT.admin_initiate_auth(
+      res = COGNITO_CLIENT.admin_initiate_auth(
         user_pool_id:    ENV['COGNITO_USER_POOL_ID'],
         client_id:       ENV['COGNITO_CLIENT_ID'],
         auth_flow:       'ADMIN_NO_SRP_AUTH',
-        auth_parameters: {
-          USERNAME:    username,
-          PASSWORD:    password,
-          SECRET_HASH: secret_hash(username),
-        },
+        auth_parameters: auth_parameters(username, password),
       )
+
+      UserEntity.new.tap do |e|
+        e.store_from_auth(username, res)
+      end
     end
 
     def me(access_token)
@@ -26,6 +26,14 @@ class CognitoRepository < ApplicationRepository
     end
 
     private
+
+    def auth_parameters(username, password)
+      {
+        USERNAME:    username,
+        PASSWORD:    password,
+        SECRET_HASH: secret_hash(username),
+      }
+    end
 
     def secret_hash(username)
       Base64.strict_encode64(

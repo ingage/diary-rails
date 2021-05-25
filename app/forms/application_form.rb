@@ -7,5 +7,8 @@
 # - Validation
 #
 class ApplicationForm
-  # Form の共通処理
+
+  include ::ActiveModel::Model
+  include ::ActiveModel::Attributes
+
 end

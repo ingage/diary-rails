@@ -18,7 +18,7 @@ class AssetsPathProxy < Rack::Proxy
       env['HTTP_X_FORWARDED_SERVER'] = dev_server
     end
 
-    env['PATH_INFO'] = "/assets/#{env['PATH_INFO'].split('/')[-2..-1].join('/')}"
+    env['PATH_INFO'] = "/assets/#{env['PATH_INFO'].split('/')[-2..].join('/')}"
     super
   end
 

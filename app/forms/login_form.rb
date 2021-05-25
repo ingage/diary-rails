@@ -5,9 +5,6 @@
 #
 class LoginForm < ApplicationForm
 
-  include ::ActiveModel::Model
-  include ::ActiveModel::Attributes
-
   # ATTRIBUTES
   attribute :username, :string
   attribute :password, :string

@@ -23,10 +23,10 @@ class SessionsController < ApplicationController
     @form = LoginForm.new(params.require('login_form'))
     return render :show if @form.invalid?
 
-    response = @form.submit
-    return render :show if response.nil?
+    user_entity = @form.submit
+    return render :show if user_entity.nil?
 
-    save_session(response.authentication_result)
+    save_session(user_entity)
     redirect_to dashboard_url
   end
 
@@ -54,7 +54,6 @@ class SessionsController < ApplicationController
       expires_in:    auth_result.expires_in,
       access_token:  auth_result.access_token,
       refresh_token: auth_result.refresh_token,
-      id_token:      auth_result.id_token,
     }
   end
 
