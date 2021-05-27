@@ -3207,6 +3207,11 @@ pify@^4.0.1:
   resolved "https://registry.yarnpkg.com/pify/-/pify-4.0.1.tgz#4b2cd25c50d598735c50292224fd8c6df41e3231"
   integrity sha512-uB80kBFb/tfd68bVleG9T5GGsGPjJrLAUpR5PZIrhBnIaRTQRjqdJSsIKkOP6OAIFbj7GOrcudc5pNjZ+geV2g==
 
+pinia@^0.5.1:
+  version "0.5.1"
+  resolved "https://registry.yarnpkg.com/pinia/-/pinia-0.5.1.tgz#9f26cebc9faa33509a304f7f5f088e3dc283c1b6"
+  integrity sha512-EPapne/rmqHlYUEIou9xn0MdC8IVbr+lGRUcpuWVQJ5inpR9MjcXNJC2XILibErxhV0IohSGSfxg3XHV6loKYg==
+
 pinkie-promise@^2.0.0:
   version "2.0.1"
   resolved "https://registry.yarnpkg.com/pinkie-promise/-/pinkie-promise-2.0.1.tgz#2135d6dfa7a358c069ac9b178776288228450ffa"
