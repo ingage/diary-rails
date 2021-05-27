@@ -61,3 +61,4 @@ jobs:
 
       - name: Rubocop checks
         run: bundle exec rubocop -D -E -S -P
+
