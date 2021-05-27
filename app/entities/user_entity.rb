@@ -5,6 +5,7 @@
 #
 class UserEntity < ApplicationEntity
 
+  # TODO: ActiveModel に準じるようにする
   attr_accessor :email,
                 :expires_in,
                 :access_token,

@@ -13,18 +13,6 @@ class LoginForm < ApplicationForm
   validates :username, presence: true
   validates :password, presence: true
 
-  #
-  # Constructor
-  #
-  def initialize(params = nil)
-    p = if params.present?
-          params.permit(:username, :password)
-        else
-          {}
-        end
-    super(p)
-  end
-
   def submit
     return nil if invalid?
 

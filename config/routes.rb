@@ -23,4 +23,14 @@ Rails.application.routes.draw do
   # ここからログイン後の画面
   #
   get 'dashboard' => 'dashboard#show'
+
+  #
+  # API
+  #
+  namespace :api do
+    namespace :v1 do
+      resources :journals
+    end
+  end
+
 end

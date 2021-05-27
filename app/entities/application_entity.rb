@@ -4,6 +4,12 @@
 # Entity の基底クラス
 #
 class ApplicationEntity
-  # Entity の共通処理を書く
-  # インスタンス生成コストを嫌ってしてないけど ActiveModel を継承しても良いかもしれない
+
+  # Rails.logger.debug を logger.debug などを使えるようにする
+  include ActiveSupport::Configurable
+  include AbstractController::Logger
+
+  include ::ActiveModel::Model
+  include ::ActiveModel::Attributes
+
 end

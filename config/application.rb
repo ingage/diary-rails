@@ -36,10 +36,12 @@ module DiaryRails
 
     config.time_zone = 'Asia/Tokyo'
 
+    config.paths.add 'entities',        eager_load: true
     config.paths.add 'forms',           eager_load: true
     config.paths.add 'repositories',    eager_load: true
     config.paths.add 'usecases',        eager_load: true
     config.paths.add 'lib',             eager_load: true
+    config.paths.add 'lib/errors',      eager_load: true
     config.paths.add 'lib/middlewares', eager_load: true
 
   end
