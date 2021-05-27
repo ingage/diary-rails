@@ -5,8 +5,9 @@
 #
 class SessionsController < ApplicationController
 
+  # TODO: Session 保持がうまく動作しないので CSRF Token の検証を一旦しないことにする
   # ログイン・ログアウト処理では認証処理はスキップする
-  skip_before_action :authenticate_user!
+  # skip_before_action :authenticate_user!
 
   #
   # GET /login

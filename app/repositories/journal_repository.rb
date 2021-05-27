@@ -7,22 +7,26 @@ class JournalRepository < ApplicationRepository
 
   class << self
 
-    def list(user_email, date)
+    # TODO: 直接ハッシュを生成しているので一旦 rubocop を止める
+    # rubocop:disable Metrics/MethodLength:
+    def list(_user_email, _date)
       # 日報の検索処理
+      #
       [{
-         user_email: 'ishida@ingage.jp',
-         date: '20210527',
-         memo: 'xxxxxx',
-         secret_memo: 'yyyyy',
-         leave_flag: false,
-       }, {
-        user_email: 'nagata@ingage.jp',
-        date: '20210527',
-        memo: 'aaaaaaa',
+        user_email:  'ishida@ingage.jp',
+        date:        '20210527',
+        memo:        'xxxxxx',
+        secret_memo: 'yyyyy',
+        leave_flag:  false,
+      }, {
+        user_email:  'nagata@ingage.jp',
+        date:        '20210527',
+        memo:        'aaaaaaa',
         secret_memo: 'bbbbbbbb',
-        leave_flag: false,
-       }]
+        leave_flag:  false,
+      }]
     end
+    # rubocop:enable Metrics/MethodLength:
 
     def find(user_email:, date:)
       # 日報の検索（1件取得）処理

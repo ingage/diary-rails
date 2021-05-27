@@ -11,8 +11,7 @@ class Api::JournalsUsecase < ApplicationUsecase
       raise ArgumentError unless form.is_a?(Api::Journals::SearchForm)
       raise Api::BadRequestError, form.errors if form.invalid?
 
-      entities = JournalRepository.list(form.user_email, form.date)
-      entities
+      JournalRepository.list(form.user_email, form.date)
     end
 
     def find(form)
