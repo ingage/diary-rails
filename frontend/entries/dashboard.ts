@@ -1,13 +1,15 @@
 import Vue from 'vue';
 import '@p/compositionApi';
-import vuetify from '@p/vuetify';
 import pinia from '@p/pinia';
+import router from '@p/vueRouter';
+import vuetify from '@p/vuetify';
 
-import Dashboard from '@c/pages/Dashboard.vue';
+import App from '@c/App.vue';
 
 new Vue({
   el: '#app',
-  render: h => h(Dashboard),
+  render: h => h(App),
   pinia: pinia,
+  router: router,
   vuetify: vuetify,
 });
