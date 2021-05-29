@@ -28,7 +28,7 @@ class SessionsController < ApplicationController
     return render :show if user_entity.nil?
 
     save_session(user_entity)
-    redirect_to dashboard_url
+    redirect_to main_url
   end
 
   #
