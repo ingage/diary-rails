@@ -1,19 +1,31 @@
 <template>
-  <v-app id="app">
-    <v-system-bar app>
-      <v-spacer></v-spacer>
-
-      <v-icon>mdi-square</v-icon>
-      <v-icon>mdi-circle</v-icon>
-      <v-icon>mdi-triangle</v-icon>
-    </v-system-bar>
-
-    <router-view />
-  </v-app>
+  <div>
+    <div v-if="state.loading">loading...</div>
+    <router-view v-if="!state.loading" />
+  </div>
 </template>
 
 <script lang="ts">
-import { defineComponent } from '@vue/composition-api';
+import { defineComponent, onMounted, reactive } from '@vue/composition-api';
+import AppModule from '@/modules/AppModule';
+import AppState from '@/states/AppState';
 
-export default defineComponent({});
+export default defineComponent({
+  setup() {
+    const state = new AppState();
+    state.loading = true;
+
+    onMounted(() => {
+      AppModule.get()
+        .setup()
+        .then(() => {
+          state.loading = false;
+        });
+    });
+
+    return {
+      state: reactive(state),
+    };
+  },
+});
 </script>

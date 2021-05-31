@@ -10,6 +10,8 @@ import {
   watch,
 } from '@vue/composition-api';
 import DashboardPage from '@c/pages/DashboardPage.vue';
+import JournalsPage from '@c/pages/JournalsPage.vue';
+import JournalsEditPage from '@c/pages/JournalsEditPage.vue';
 
 // vue3 に合わせて inject しておく
 // TODO: vue3, vue-router-next に上がったら削除する
@@ -64,25 +66,27 @@ const routes = [
     path: '/',
     component: DashboardPage,
     props: () => ({}),
-    // }, {
-    //   // 日報を検索できるメインページ
-    //   name: 'journals',
-    //   path: '/journals',
-    //   component: JournalsPage,
-    //   props: (route: Route) => ({
-    //     since: route.params.since,
-    //     until: route.params.until,
-    //     userEmails: route.params.userEmails ? route.params.userEmails : [],
-    //   }),
-    // }, {
-    //   // 日報入力画面
-    //   name: 'journals.edit',
-    //   path: '/journals/edit/:date/userEmail',
-    //   component: JournalsEditPage,
-    //   props: (route: Route) => ({
-    //     userEmail: route.params.userEmail,
-    //     date: route.params.date,
-    //   }),
+  },
+  {
+    // 日報を検索できるメインページ
+    name: 'journals',
+    path: '/journals',
+    component: JournalsPage,
+    props: (route: Route) => ({
+      since: route.params.since,
+      until: route.params.until,
+      userEmails: route.params.userEmails ? route.params.userEmails : [],
+    }),
+  },
+  {
+    // 日報入力画面
+    name: 'journals.edit',
+    path: '/journals/edit/:date/:userEmail',
+    component: JournalsEditPage,
+    props: (route: Route) => ({
+      userEmail: route.params.userEmail,
+      date: route.params.date,
+    }),
     // }, {
     //   // カテゴリ一覧画面
     //   name: 'categories',

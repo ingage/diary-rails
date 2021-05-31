@@ -1,5 +1,13 @@
 <template>
   <v-app id="dashboard">
+    <v-system-bar app>
+      <v-spacer></v-spacer>
+
+      <v-icon>mdi-square</v-icon>
+      <v-icon>mdi-circle</v-icon>
+      <v-icon>mdi-triangle</v-icon>
+    </v-system-bar>
+
     <v-navigation-drawer v-model="state.drawer" app>
       <v-sheet color="grey lighten-4" class="pa-4">
         <v-avatar class="mb-4" color="grey darken-1" size="64"></v-avatar>
@@ -57,15 +65,13 @@
 
 <script lang="ts">
 import { defineComponent, reactive } from '@vue/composition-api';
-import DashboardController from '@/controllers/DashboardController';
-import DashboardModule from '@/modules/DashboardModule';
-import DashboardState from '@/states/DashboardState';
+import DashboardPageController from '@/controllers/DashboardPageController';
+import DashboardPageState from '@/states/DashboardPageState';
 
 export default defineComponent({
   setup() {
-    DashboardModule.get().setup();
-    const state = new DashboardState();
-    const controller = new DashboardController(state);
+    const state = new DashboardPageState();
+    const controller = new DashboardPageController(state);
     return {
       state: reactive(state),
       actions: {

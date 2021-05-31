@@ -1,12 +1,12 @@
-import DashboardState from '@/states/DashboardState';
+import DashboardPageState from '@/states/DashboardPageState';
 
-export default class DashboardController {
+export default class DashboardPageController {
   /**
    * State の初期化をする
    * 本来はデフォルトの検索条件で検索した結果を入れる
    * @param state
    */
-  constructor(private state: DashboardState) {
+  constructor(private state: DashboardPageState) {
     state.cards = ['Today', 'Yesterday'];
     state.drawer = null;
     state.links = [
