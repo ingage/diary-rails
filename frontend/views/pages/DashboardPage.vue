@@ -64,16 +64,14 @@
 </template>
 
 <script lang="ts">
-import { defineComponent, reactive } from '@vue/composition-api';
-import DashboardPageController from '@/controllers/DashboardPageController';
-import DashboardPageState from '@/states/DashboardPageState';
+import { defineComponent } from '@vue/composition-api';
+import DashboardPageController from '@/controllers/pages/DashboardPageController';
 
 export default defineComponent({
   setup() {
-    const state = new DashboardPageState();
-    const controller = new DashboardPageController(state);
+    const controller = new DashboardPageController();
     return {
-      state: reactive(state),
+      state: controller.state,
       actions: {
         click: () => controller.click(),
       },

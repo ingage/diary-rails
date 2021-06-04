@@ -31,7 +31,7 @@ module.exports = {
       fix: true,
       extensions: ['js', 'ts'],
       files: [
-        'components/**/*',
+        'views/**/*',
         'entries/**/*',
         'lib/**/*',
         'plugins/**/*',
@@ -117,7 +117,7 @@ module.exports = {
     alias: {
       vue: "vue/dist/vue.js",
       '@':  path.resolve(__dirname, './lib'),
-      '@c': path.resolve(__dirname, './components'),
+      '@v': path.resolve(__dirname, './views'),
       '@p': path.resolve(__dirname, './plugins'),
     },
   },

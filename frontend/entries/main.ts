@@ -4,7 +4,7 @@ import pinia from '@p/pinia';
 import router from '@p/vueRouter';
 import vuetify from '@p/vuetify';
 
-import App from '@c/App.vue';
+import App from '@v/App.vue';
 
 new Vue({
   el: '#app',

@@ -6,6 +6,10 @@ export default class Category {
   groupId = '';
   capitalizeFlag = false;
 
+  constructor(obj?: Partial<Category>) {
+    Object.assign(this, obj);
+  }
+
   static createFromResponse(response: CategoryResponseType): Category {
     const c = new Category();
     c.id = response.id;

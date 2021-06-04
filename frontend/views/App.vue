@@ -8,23 +8,23 @@
 <script lang="ts">
 import { defineComponent, onMounted, reactive } from '@vue/composition-api';
 import AppModule from '@/modules/AppModule';
-import AppState from '@/states/AppState';
+import AppController from '@/controllers/AppController';
 
 export default defineComponent({
   setup() {
-    const state = new AppState();
-    state.loading = true;
+    const controller = new AppController();
+    controller.startLoad();
 
     onMounted(() => {
       AppModule.get()
         .setup()
         .then(() => {
-          state.loading = false;
+          controller.endLoad();
         });
     });
 
     return {
-      state: reactive(state),
+      state: reactive(controller.state),
     };
   },
 });

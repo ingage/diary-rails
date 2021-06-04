@@ -9,9 +9,9 @@ import {
   UnwrapRef,
   watch,
 } from '@vue/composition-api';
-import DashboardPage from '@c/pages/DashboardPage.vue';
-import JournalsPage from '@c/pages/JournalsPage.vue';
-import JournalsEditPage from '@c/pages/JournalsEditPage.vue';
+import DashboardPage from '@v/pages/DashboardPage.vue';
+import JournalsListPage from '@v/pages/JournalsListPage.vue';
+import JournalsEditPage from '@v/pages/JournalsEditPage.vue';
 
 // vue3 に合わせて inject しておく
 // TODO: vue3, vue-router-next に上がったら削除する
@@ -71,7 +71,7 @@ const routes = [
     // 日報を検索できるメインページ
     name: 'journals',
     path: '/journals',
-    component: JournalsPage,
+    component: JournalsListPage,
     props: (route: Route) => ({
       since: route.params.since,
       until: route.params.until,

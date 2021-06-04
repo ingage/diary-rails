@@ -1,8 +1,16 @@
+import JournalTask from '@/entities/JournalTask';
+
 export default class Journal {
-  id: string = '';
-  userEmail: string = '';
-  date: string = '';
-  memo: string = '';
-  secretMemo: string = '';
-  leaveFlag: boolean = false;
+  id = '';
+  userEmail = '';
+  groupId = '';
+  date = '';
+  memo = '';
+  secretMemo = '';
+  leaveFlag = false;
+  tasks: JournalTask[] = [];
+
+  constructor(obj?: Partial<Journal>) {
+    Object.assign(this, obj);
+  }
 }
