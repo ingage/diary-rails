@@ -7,19 +7,18 @@ COPY --from=node /usr/local/lib/node_modules /usr/local/lib/node_modules
 
 RUN apt-get update && apt-get install --no-install-recommends -y \
     build-essential \
+    ca-certificates \
+    imagemagick \
+    libidn11 \
     libjemalloc-dev \
     libjemalloc2 \
+    libmagickwand-dev \
+    libpq-dev \
     libxml2-dev \
     libxslt-dev \
     tzdata \
-    ca-certificates \
-    libidn11 \
-    libpq-dev \
-    imagemagick \
-    libmagickwand-dev \
     git \
     vim \
-    bash \
     less \
     curl
 
