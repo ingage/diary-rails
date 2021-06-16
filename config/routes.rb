@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
-  root   to: redirect('/dashboard')
-
   get    'login'  => 'sessions#show'
   post   'login'  => 'sessions#login'
   get    'logout' => 'sessions#logout'
@@ -22,7 +20,7 @@ Rails.application.routes.draw do
   #
   # ここからログイン後の画面
   #
-  get 'dashboard' => 'dashboard#show'
+  get '/' => 'main#show'
 
   #
   # API
@@ -30,6 +28,7 @@ Rails.application.routes.draw do
   namespace :api do
     namespace :v1 do
       resources :journals
+      resources :categories
     end
   end
 end

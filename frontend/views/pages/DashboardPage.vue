@@ -4,13 +4,11 @@
       <v-spacer></v-spacer>
 
       <v-icon>mdi-square</v-icon>
-
       <v-icon>mdi-circle</v-icon>
-
       <v-icon>mdi-triangle</v-icon>
     </v-system-bar>
 
-    <v-navigation-drawer v-model="drawer" app>
+    <v-navigation-drawer v-model="state.drawer" app>
       <v-sheet color="grey lighten-4" class="pa-4">
         <v-avatar class="mb-4" color="grey darken-1" size="64"></v-avatar>
 
@@ -20,7 +18,7 @@
       <v-divider></v-divider>
 
       <v-list>
-        <v-list-item v-for="[icon, text] in links" :key="icon" link>
+        <v-list-item v-for="[icon, text] in state.links" :key="icon" link>
           <v-list-item-icon>
             <v-icon>{{ icon }}</v-icon>
           </v-list-item-icon>
@@ -35,7 +33,7 @@
     <v-main>
       <v-container class="py-8 px-6" fluid>
         <v-row>
-          <v-col v-for="card in cards" :key="card" cols="12">
+          <v-col v-for="card in state.cards" :key="card" cols="12">
             <v-card>
               <v-subheader>{{ card }}</v-subheader>
 
@@ -44,7 +42,7 @@
                   <v-list-item :key="n">
                     <v-list-item-avatar color="grey darken-1"> </v-list-item-avatar>
 
-                    <v-list-item-content>
+                    <v-list-item-content @click="actions.click()">
                       <v-list-item-title>Message {{ n }}</v-list-item-title>
 
                       <v-list-item-subtitle>
@@ -66,28 +64,18 @@
 </template>
 
 <script lang="ts">
-// import { defineComponent } from '@vue/composition-api';
-// import DashboardModule from '@/modules/dashboard_module';
-// // import TodoListPage from "@/view/components/TodoListPage.vue";
-// export default defineComponent({
-//   // components: {
-//   //   TodoListPage
-//   // },
-//   setup() {
-//     DashboardModule.get().setup();
-//   },
-// });
+import { defineComponent } from '@vue/composition-api';
+import DashboardPageController from '@/controllers/pages/DashboardPageController';
 
-export default {
-  data: () => ({
-    cards: ['Today', 'Yesterday'],
-    drawer: null,
-    links: [
-      ['mdi-inbox-arrow-down', 'Inbox'],
-      ['mdi-send', 'Send'],
-      ['mdi-delete', 'Trash'],
-      ['mdi-alert-octagon', 'Spam'],
-    ],
-  }),
-};
+export default defineComponent({
+  setup() {
+    const controller = new DashboardPageController();
+    return {
+      state: controller.state,
+      actions: {
+        click: () => controller.click(),
+      },
+    };
+  },
+});
 </script>

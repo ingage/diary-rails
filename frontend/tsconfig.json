@@ -22,8 +22,8 @@
     "paths": {
       "@":   ["lib"],
       "@/*": ["lib/*"],
-      "@c":   ["components"],
-      "@c/*": ["components/*"],
+      "@v":   ["views"],
+      "@v/*": ["views/*"],
       "@p":   ["plugins"],
       "@p/*": ["plugins/*"]
     }
@@ -31,7 +31,7 @@
 
   "include": [
     "./@type/**/*.d.ts",
-    "./components/**/*.vue",
+    "./views/**/*.vue",
     "./entries/**/*.ts",
     "./lib/**/*.ts",
     "./plugins/**/*.ts",

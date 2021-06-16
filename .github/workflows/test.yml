@@ -1,0 +1,64 @@
+name: "Test"
+
+on:
+  push:
+
+jobs:
+  ruby-build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Set up Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: 3.0.1
+
+      # # ここで止めて ssh を受け付ける
+      # # https://qiita.com/shonansurvivors/items/cb8902acfe5c3a1b3ca0
+      # - name: Setup tmate session
+      #   uses: mxschmitt/action-tmate@v2
+
+      # 必要なものをインストール
+      - name: Install dependencies
+        run: |
+          sudo apt-get update && sudo apt-get install --no-install-recommends -y \
+              build-essential \
+              libjemalloc-dev \
+              libjemalloc2 \
+              libxml2-dev \
+              libxslt-dev \
+              tzdata \
+              ca-certificates \
+              libidn11 \
+              libpq-dev \
+              imagemagick \
+              libmagickwand-dev \
+              git \
+              vim \
+              bash \
+              less \
+              curl
+
+      # vendor/bundle をキャッシュする。
+      # というか、ここで行われるのは、キャッシュのリストア。
+      # キャッシュは、この job が成功した後に行われる。
+      - name: Cache bundle directory
+        uses: actions/cache@v2
+        with:
+          path: vendor/bundle
+          key: ${{ runner.os }}-gem-${{ hashFiles('**/Gemfile.lock') }}
+
+      - name: install gem with bundler
+        run: bundle install --jobs 4 --retry 3 --path=vendor/bundle
+
+      - name: echo information
+        run: |
+          echo "ruby version $(ruby --version) running"
+          echo "  from location $(which ruby)"
+          echo -p "gem list: $(gem list)"
+
+      - name: Rubocop checks
+        run: bundle exec rubocop -D -E -S -P
+
