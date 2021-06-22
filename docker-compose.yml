@@ -11,6 +11,8 @@ services:
       REDIS_HOST: redis
       WEBPACK_HOST: webpack
       WEBPACK_PORT: 3040
+      DYNAMODB_HOST: dynamodb
+
     restart: always
     command: bash -c "rm -f /journally/tmp/pids/server.pid; bundle exec rails s -p 3000 -b '0.0.0.0'"
 #    healthcheck:
@@ -25,6 +27,7 @@ services:
       - .:/journally
       - /journally/frontend/node_modules
       - /journally/public
+      - $HOME/.aws/:/journally/.aws/
 
   webpack:
     container_name: journally-webpack

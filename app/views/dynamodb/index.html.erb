@@ -1,0 +1,31 @@
+<style>
+  div { font-weight: bold }
+</style>
+
+<div>Aws::DynamoDB::Table#get_item</div>
+<%#
+  get_item の場合は .item で中身取得
+%>
+<%= @diary.item %>
+<br>
+<br>
+
+
+<div>Aws::DynamoDB::Table#query</div>
+<% @diary_details.items.each do |diary_detail| %>
+  <%#
+    query の場合は .items の配列に中身が入っている
+  %>
+  <%= diary_detail %><br>
+<% end %>
+<br>
+<br>
+
+
+<div>Aws::DynamoDB::Client#batch_get_item</div>
+<% @diaries.responses['JournallyTable'].each do |diary| %>
+  <%#
+    batch_get_item の場合は responses[table_name] の配列に中身が入っている
+  %>
+  <%= diary %><br>
+<% end %>

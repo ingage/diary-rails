@@ -31,8 +31,8 @@ gem 'aws-sdk-cognitoidentityprovider'
 # use redis-store for session
 gem 'redis-actionpack'
 
-# Ruby ORM for Amazon's DynamoDB
-gem 'dynamoid', '~> 3.7.0'
+# Amazon's DynamoDB
+gem 'aws-sdk-dynamodb', '~> 1'
 
 # Slack
 gem 'slack-ruby-client'

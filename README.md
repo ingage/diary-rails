@@ -26,11 +26,17 @@ $ docker-compose up -d
 
 Mac から http://localhost:3007 でアクセスする。
 
+### テーブル作成
+
+テーブルはひとつです。
+
+```
+docker-compose run web bundle exec rails dynamodb:create_table
+```
+
 ### 初期データ投入
 
-TBD
-
-dynamodb にテーブル作って、初期データを投入する感じ
+いるなら dynamodb.rake の中でやっちゃう感じ
 
 ## 日々の開発運用
 

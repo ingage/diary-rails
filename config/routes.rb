@@ -22,6 +22,8 @@ Rails.application.routes.draw do
   #
   get '/' => 'main#show'
 
+  get '/dynamodb' => 'dynamodb#index'
+
   #
   # API
   #
